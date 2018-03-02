@@ -21,6 +21,11 @@
 			 //$usercount = 0;
 
 			if(mysqli_query($link, $loginstring)){
+				$_SESSION['user_count']= $founduser['user_count'];
+				$_SESSION['user_count'] +=1;
+				$usercount = $_SESSION['user_count'];
+
+
 				$update = "UPDATE tbl_user SET user_ip='{$ip}' WHERE user_id='{$id}'";
 				$updatequery = mysqli_query($link, $update);
 
@@ -30,16 +35,16 @@
 				//echo $lastLogin;
 
 
-				$usercount++;
+				//$usercount++;
 				$count = "UPDATE tbl_user SET user_count='{$usercount}' WHERE user_name='{$username}'";
-				//$updateCount = mysqli_query($link, $count);
+				$updateCount = mysqli_query($link, $count);
 
 				//if user is first logged in, take them to edit user
-					if($usercount++){
-						$count = "UPDATE tbl_user SET user_count='{$usercount}' WHERE user_name='{$username}'";
-						$updateCount = mysqli_query($link, $count);
-
-					}
+					// if($usercount++){
+					// 	$count = "UPDATE tbl_user SET user_count='{$usercount}' WHERE user_name='{$username}'";
+					// 	$updateCount = mysqli_query($link, $count);
+          //
+					// }
 				 if($usercount == 1)
 				{
 					redirect_to('admin_edituser.php');
